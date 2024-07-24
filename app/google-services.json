@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "439098027896",
+    "firebase_url": "https://bazzu-sports-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "bazzu-sports",
+    "storage_bucket": "bazzu-sports.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439098027896:android:6897fbfc2ecb2e7857a28d",
+        "android_client_info": {
+          "package_name": "com.bazu.bazujpadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439098027896-m0fk3mmmnf4butpnurps9m1ahqp0ds0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU1r6wPBotQ3pw_6gGEOUR1-QhsTJFF64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439098027896-m0fk3mmmnf4butpnurps9m1ahqp0ds0v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439098027896:android:51028573ab9389e757a28d",
+        "android_client_info": {
+          "package_name": "com.bazzu.bazzusportsandtips"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439098027896-m0fk3mmmnf4butpnurps9m1ahqp0ds0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU1r6wPBotQ3pw_6gGEOUR1-QhsTJFF64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439098027896-m0fk3mmmnf4butpnurps9m1ahqp0ds0v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

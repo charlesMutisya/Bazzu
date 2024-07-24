@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Bazzu Sports</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment iko</string>
+    <string name="title_activity_firebase_games">FirebaseGames</string>
+
+    <string name="menu_feedbackbazu">Feedback</string>
+    <string name="menu_Ratingbazu">Rate/Update </string>
+    <string name="menu_share">Share</string>
+    <string name="policyb">Privacy Policy</string>
+    <string name="aboutbazu">About Us</string>
+    <string name="cright">Copyright</string>
+    <string name="date">date</string>
+    <string name="posted">post</string>
+    <string name="post_timepot">time</string>
+    <string name="bazbannertest">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="bazinterstest">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="bazengaabout">https://bazengatips.blogspot.com/p/about-us.html</string>
+    <string name="bazengapolicy">https://bazengatips.blogspot.com/p/privacy-policy.html</string>
+    <string name="bazengainter">ca-app-pub-8414079200987268/9356349338</string>
+    <string name="bazengabanner">ca-app-pub-8414079200987268/2982512677</string>
+    <string name="bazengapubid">ca-app-pub-8414079200987268~4394014306</string>
+</resources>
