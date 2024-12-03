@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.AD_ID"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.AD_ID" />
 
 
     <application
+        android:name=".BazengaApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,14 +16,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BazzuSportsAndTips"
-        tools:targetApi="33"
-        >
-        
+        tools:targetApi="33">
+
         <activity
             android:name=".ContactFeedback"
             android:exported="false" />
         <activity
             android:name=".BazengaPostDetails"
+            android:exported="false" />
+
+        <activity
+            android:name=".Settings"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -39,13 +42,14 @@
         <activity
             android:name=".BazengafbGames"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8414079200987268~4394014306" />
+            android:value="@string/app_id" />
         <property
             android:name="android.adservices.AD_SERVICES_CONFIG"
             android:resource="@xml/gma_ad_services_config"
-            tools:replace="android:resource"/>
+            tools:replace="android:resource" />
 
     </application>
 
