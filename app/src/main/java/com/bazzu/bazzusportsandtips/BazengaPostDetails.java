@@ -124,7 +124,19 @@ public class BazengaPostDetails extends AppCompatActivity {
             Intent intentfeed = new Intent(BazengaPostDetails.this, ContactFeedback.class);
             startActivity(intentfeed);
         }
+        else if (id == R.id.settings) {
+            startActivity(new Intent(BazengaPostDetails.this, Settings.class));
+        }
+        else if (id == R.id.rate) {
+            Uri uri = Uri.parse("market://details?id=" + getPackageName());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(this, "Unable to find play store", Toast.LENGTH_SHORT).show();
+            }
 
+        }
         else if (id == R.id.abtback) {
         Uri uri = Uri.parse("https://bazengatips.blogspot.com/p/about-us.html");
         Intent intentin = new Intent(Intent.ACTION_VIEW, uri);

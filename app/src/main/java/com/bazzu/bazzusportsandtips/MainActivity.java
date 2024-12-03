@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
     private static final String TAG = MainActivity.class.getSimpleName();
     private AdView adView;
     private FrameLayout adContainerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,10 +113,10 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
             }
         });
 
-        List<String> testDeviceIds = Arrays.asList("A495737AC2DE249B8DDC76267D4AD0F8");
+        /*List<String> testDeviceIds = Arrays.asList("");
         RequestConfiguration configuration =
                 new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
-        MobileAds.setRequestConfiguration(configuration);
+        MobileAds.setRequestConfiguration(configuration);*/
 
         adContainerView.post(new Runnable() {
             @Override
@@ -170,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
                 Toast.makeText(this, "Unable to find policy page", Toast.LENGTH_SHORT).show();
             }
 
+        } else if (id == R.id.settings) {
+            startActivity(new Intent(MainActivity.this, Settings.class));
         } else if (id == R.id.abtback) {
             Uri uri = Uri.parse("https://bazengatips.blogspot.com/p/about-us.html");
             Intent intentin = new Intent(Intent.ACTION_VIEW, uri);
@@ -179,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
                 Toast.makeText(this, "Unable to find about page", Toast.LENGTH_SHORT).show();
             }
 
-        }else if (id == R.id.copyright){
+        } else if (id == R.id.copyright) {
             Uri uri = Uri.parse("https://bazengatips.blogspot.com/p/copyright-notice.html");
             Intent intentin = new Intent(Intent.ACTION_VIEW, uri);
             try {
@@ -222,10 +225,11 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
     private void loadBanner() {
         // Create an ad request.
         adView = new AdView(this);
-        adView.setAdUnitId(getString(R.string.bazengabanner));
+        adView.setAdUnitId(getString(R.string.banner_ad_unit_id));
         adContainerView.removeAllViews();
         adContainerView.addView(adView);
 
@@ -258,12 +262,12 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
     }
 
 
-
     @Override
     protected void onStart() {
         BazengaForceUpdateChecker.with(this).onUpdateNeeded(this).check();
         super.onStart();
     }
+
     @Override
     protected void onPause() {
         if (adView != null) {
