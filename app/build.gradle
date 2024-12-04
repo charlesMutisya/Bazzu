@@ -31,6 +31,9 @@ android {
         viewBinding true
     }
     namespace 'com.bazzu.bazzusportsandtips'
+    buildFeatures {
+        buildConfig true
+    }
 }
 
 dependencies {
@@ -60,7 +63,6 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
     implementation 'com.google.android.play:app-update:2.1.0'
     implementation 'com.google.android.play:review:2.0.2'
-
 
 
     implementation 'androidx.preference:preference:1.2.1'

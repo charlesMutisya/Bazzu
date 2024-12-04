@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        BazengaForceUpdateChecker.with(this).onUpdateNeeded(this).check();
 
         //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         //appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -81,30 +82,6 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
         }).attach();
 
 
-        final FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-        // set in-app defaults
-        Map<String, Object> remoteConfigDefaults = new HashMap();
-        remoteConfigDefaults.put(BazengaForceUpdateChecker.KEY_UPDATE_REQUIRED, false);
-        remoteConfigDefaults.put(BazengaForceUpdateChecker.KEY_CURRENT_VERSION, "1.0");
-        remoteConfigDefaults.put(BazengaForceUpdateChecker.KEY_UPDATE_URL,
-                "https://play.google.com/store/apps/details?id=com.bazzu.bazzusportsandtips");
-
-        firebaseRemoteConfig.setDefaultsAsync(remoteConfigDefaults);
-        //firebaseRemoteConfig.setDefaults(remoteConfigDefaults);
-        firebaseRemoteConfig.fetch(60) // fetch every minutes
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "remote config is fetched.");
-                            firebaseRemoteConfig.fetchAndActivate();
-                        }
-                    }
-
-
-                });
-
-        BazengaForceUpdateChecker.with(this).onUpdateNeeded(this).check();
         AudienceNetworkAds.initialize(this);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -126,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
         });
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -281,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements BazengaForceUpdat
         if (adView != null) {
             adView.resume();
         }
+        BazengaForceUpdateChecker.with(this).onUpdateNeeded(this).check();
         super.onResume();
     }
 

@@ -22,9 +22,14 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.appopen.AppOpenAd;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BazengaApp extends MultiDexApplication
         implements Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
@@ -53,6 +58,26 @@ public class BazengaApp extends MultiDexApplication
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
         appOpenAdManager = new AppOpenAdManager();
+        final FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        // set in-app defaults
+        Map<String, Object> remoteConfigDefaults = new HashMap();
+        remoteConfigDefaults.put(BazengaForceUpdateChecker.KEY_UPDATE_REQUIRED, false);
+        remoteConfigDefaults.put(BazengaForceUpdateChecker.KEY_CURRENT_VERSION, BuildConfig.VERSION_NAME);
+        remoteConfigDefaults.put(BazengaForceUpdateChecker.KEY_UPDATE_URL,
+                "https://play.google.com/store/apps/details?id=" + getPackageName());
+
+        firebaseRemoteConfig.setDefaultsAsync(remoteConfigDefaults);
+        //firebaseRemoteConfig.setDefaults(remoteConfigDefaults);
+        firebaseRemoteConfig.fetch(60) // fetch every minutes
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            firebaseRemoteConfig.fetchAndActivate();
+                            //Log.d(TAG, "remote config is fetched. " + firebaseRemoteConfig.getAll());
+                        }
+                    }
+                });
         Log.d(TAG, "BazengaApp onCreate: Application started");
     }
 
@@ -62,6 +87,7 @@ public class BazengaApp extends MultiDexApplication
         MultiDex.install(this);
         Log.d(TAG, "BazengaApp attachBaseContext: MultiDex installed");
     }
+
     public static synchronized BazengaApp getInstance() {
         return mInstance;
     }
@@ -77,9 +103,12 @@ public class BazengaApp extends MultiDexApplication
         appOpenAdManager.showAdIfAvailable(currentActivity);
     }
 
-    /** ActivityLifecycleCallback methods. */
+    /**
+     * ActivityLifecycleCallback methods.
+     */
     @Override
-    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {}
+    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+    }
 
     @Override
     public void onActivityStarted(@NonNull Activity activity) {
@@ -93,19 +122,24 @@ public class BazengaApp extends MultiDexApplication
     }
 
     @Override
-    public void onActivityResumed(@NonNull Activity activity) {}
+    public void onActivityResumed(@NonNull Activity activity) {
+    }
 
     @Override
-    public void onActivityPaused(@NonNull Activity activity) {}
+    public void onActivityPaused(@NonNull Activity activity) {
+    }
 
     @Override
-    public void onActivityStopped(@NonNull Activity activity) {}
+    public void onActivityStopped(@NonNull Activity activity) {
+    }
 
     @Override
-    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {}
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+    }
 
     @Override
-    public void onActivityDestroyed(@NonNull Activity activity) {}
+    public void onActivityDestroyed(@NonNull Activity activity) {
+    }
 
     /**
      * Load an app open ad.
@@ -121,7 +155,7 @@ public class BazengaApp extends MultiDexApplication
     /**
      * Shows an app open ad.
      *
-     * @param activity the activity that shows the app open ad
+     * @param activity                 the activity that shows the app open ad
      * @param onShowAdCompleteListener the listener to be notified when an app open ad is complete
      */
     public void showAdIfAvailable(
@@ -139,16 +173,22 @@ public class BazengaApp extends MultiDexApplication
         void onShowAdComplete();
     }
 
-    /** Inner class that loads and shows app open ads. */
+    /**
+     * Inner class that loads and shows app open ads.
+     */
     private class AppOpenAdManager {
         private AppOpenAd appOpenAd = null;
         private boolean isLoadingAd = false;
         private boolean isShowingAd = false;
 
-        /** Keep track of the time an app open ad is loaded to ensure you don't show an expired ad. */
+        /**
+         * Keep track of the time an app open ad is loaded to ensure you don't show an expired ad.
+         */
         private long loadTime = 0;
 
-        /** Constructor. */
+        /**
+         * Constructor.
+         */
         public AppOpenAdManager() {
             Log.d(TAG, "AppOpenAdManager: Initialized");
         }
@@ -199,14 +239,18 @@ public class BazengaApp extends MultiDexApplication
                     });
         }
 
-        /** Check if ad was loaded more than n hours ago. */
+        /**
+         * Check if ad was loaded more than n hours ago.
+         */
         private boolean wasLoadTimeLessThanNHoursAgo(long numHours) {
             long dateDifference = (new Date()).getTime() - loadTime;
             long numMilliSecondsPerHour = 3600000;
             return (dateDifference < (numMilliSecondsPerHour * numHours));
         }
 
-        /** Check if ad exists and can be shown. */
+        /**
+         * Check if ad exists and can be shown.
+         */
         private boolean isAdAvailable() {
             // Ad references in the app open beta will time out after four hours, but this time limit
             // may change in future beta versions. For details, see:
@@ -233,7 +277,7 @@ public class BazengaApp extends MultiDexApplication
         /**
          * Show the ad if one isn't already showing.
          *
-         * @param activity the activity that shows the app open ad
+         * @param activity                 the activity that shows the app open ad
          * @param onShowAdCompleteListener the listener to be notified when an app open ad is complete
          */
         private void showAdIfAvailable(
@@ -249,7 +293,7 @@ public class BazengaApp extends MultiDexApplication
             if (!isAdAvailable()) {
                 Log.d(TAG, "The app open ad is not ready yet.");
                 onShowAdCompleteListener.onShowAdComplete();
-                    loadAd(currentActivity);
+                loadAd(currentActivity);
                 return;
             }
 
@@ -267,7 +311,7 @@ public class BazengaApp extends MultiDexApplication
                             Log.d(TAG, "onAdDismissedFullScreenContent.");
 
                             onShowAdCompleteListener.onShowAdComplete();
-                                loadAd(activity);
+                            loadAd(activity);
                         }
 
                         /** Called when fullscreen content failed to show. */
@@ -279,7 +323,7 @@ public class BazengaApp extends MultiDexApplication
                             Log.d(TAG, "onAdFailedToShowFullScreenContent: " + adError.getMessage());
 
                             onShowAdCompleteListener.onShowAdComplete();
-                                loadAd(activity);
+                            loadAd(activity);
                         }
 
                         /** Called when fullscreen content is shown. */

@@ -34,17 +34,17 @@
     <string name="bazinterstest">ca-app-pub-3940256099942544/1033173712</string>-->
 
     <!--Google Admob Ads - Test -->
-    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <!--<string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/9214589741</string>
     <string name="interstitial_ad_unit_id">cca-app-pub-3940256099942544/1033173712</string>
     <string name="rewarded_ad_unit_id">ca-app-pub-3940256099942544/5354046379</string>
     <string name="app_open_ad_unit_id">ca-app-pub-3940256099942544/9257395921</string>
-
+-->
     <!--Google Admob Ads - Real -->
-    <!--<string name="app_id">ca-app-pub-8414079200987268~4394014306</string>
+    <string name="app_id">ca-app-pub-8414079200987268~4394014306</string>
     <string name="banner_ad_unit_id">ca-app-pub-8414079200987268/2982512677</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-8414079200987268/9356349338</string>
     <string name="rewarded_ad_unit_id">ca-app-pub-8414079200987268/3891259148</string>
-    <string name="app_open_ad_unit_id">ca-app-pub-8414079200987268/2509333632</string>-->
+    <string name="app_open_ad_unit_id">ca-app-pub-8414079200987268/2509333632</string>
 
 </resources>
